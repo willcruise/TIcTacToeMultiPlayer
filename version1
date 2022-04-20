@@ -70,12 +70,12 @@ int main() {
 	Board rule;
 	rule.ruleBoard();
 
-	cout << "Enter the referring number" << endl;
-	for (;;) {
+	for (int i=0;;i++) {
 		Board game;
 		int n = 0;
 		int count = 0;
 		rule.showBoard();
+		if (i == 0) { cout << "Enter the referring number" << endl << endl; }
 
 		for (;;) {
 			for (;;) {
@@ -107,7 +107,7 @@ int main() {
 
 		}
 
-		if (count == 9)cout << "Tie Game!" << endl;
+		if (count == 9)cout << "Tie Game!" << endl<<endl;
 		if (game.endCondition() == 1)cout << "Player 1 wins!" << endl << endl;
 		if (game.endCondition() == 2)cout << "Player 2 wins!" << endl << endl;
 
