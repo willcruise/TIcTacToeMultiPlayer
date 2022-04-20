@@ -2,6 +2,8 @@
 #include <string>
 using namespace std;
 
+
+
 class Board {
 private:
 	string r[9];
@@ -59,15 +61,17 @@ int main() {
 
 	Board rule;
 	rule.ruleBoard();
-	
+
 	cout << "Enter the referring number" << endl;
 	for (;;) {
 		Board game;
 		int n = 0;
 		int count = 0;
 		rule.showBoard();
+
 		for (;;) {
 			for (;;) {
+
 				cout << endl << "Player 1: ";
 				n = input(n);
 				if (n != 0) break;
