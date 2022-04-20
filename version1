@@ -1,0 +1,108 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Board {
+private:
+	string r[9];
+	string board;
+public:
+	Board() {
+		for (int i = 0; i < 9; i++) { r[i] = " "; }
+		board = " " + r[0] + " | " + r[1] + " | " + r[2] + "\n" + "-----------" + "\n"
+			+ " " + r[3] + " | " + r[4] + " | " + r[5] + "\n" + "-----------" + "\n" +
+			" " + r[6] + " | " + r[7] + " | " + r[8] + "\n";
+	}
+
+	void setBoard() {
+		board = " " + r[0] + " | " + r[1] + " | " + r[2] + "\n" + "----------- " + "\n"
+			+ " " + r[3] + " | " + r[4] + " | " + r[5] + "\n" + "-----------" + "\n" +
+			" " + r[6] + " | " + r[7] + " | " + r[8] + "\n";
+	}
+
+	void setRoom1(int n) { r[n - 1] = "O"; setBoard(); }
+	void setRoom2(int n) { r[n - 1] = "X"; setBoard(); }
+
+	void showBoard() { cout << endl << board << endl; }
+
+	void ruleBoard() { for (int i = 0; i < 9; ++i) { r[i] = to_string(i + 1); }; setBoard(); }
+
+	int endCondition() {
+		int l[8][3] = { 0,1,2,3,4,5,6,7,8,0,3,6,1,4,7,2,5,8,0,4,8,2,4,6 };
+
+		for (int i = 0; i < 8; ++i) {
+			if (r[l[i][0]] == r[l[i][1]] && r[l[i][0]] == r[l[i][2]] && r[l[i][2]] == "O") { return 1; }
+			else if (r[l[i][0]] == r[l[i][1]] && r[l[i][0]] == r[l[i][2]] && r[l[i][2]] == "X") { return 2; }
+			else continue;
+		}
+
+		return 0;
+	}
+
+};
+
+int input(int n) {
+	int state = false;
+	for (;;) {
+		cin >> n;
+		for (int i = 1; i < 10; ++i) { if (n == i) { state = true; } }
+		if (state) { break; }
+		else {cout << "Enter again" << endl; return 0;}
+
+	}
+	return n;
+}
+
+int main() {
+
+	cout << "<TicTacToe MultiPLayer>" << endl;
+
+	Board rule;
+	rule.ruleBoard();
+	
+	cout << "Enter the referring number" << endl;
+	for (;;) {
+		Board game;
+		int n = 0;
+		int count = 0;
+		rule.showBoard();
+		for (;;) {
+			for (;;) {
+				cout << endl << "Player 1: ";
+				n = input(n);
+				if (n != 0) break;
+			}
+			game.setRoom1(n);
+			game.showBoard();
+			++count;
+			if (game.endCondition() != 0)break;
+			else if (count == 9) break;
+			for (;;) {
+				cout << "Player 2: ";
+				n = input(n);
+				if (n != 0) break;
+			}
+			game.setRoom2(n);
+			game.showBoard();
+			++count;
+			if (game.endCondition() != 0)break;
+
+		}
+
+		if (count == 9)cout << "Tie Game!" << endl;
+		if (game.endCondition() == 1)cout << "Player 1 wins!" << endl << endl;
+		if (game.endCondition() == 2)cout << "Player 2 wins!" << endl << endl;
+
+		string d;
+		for (;;) {
+			cout << "Play again? (Y/N) : ";
+			cin >> d;
+			if (d == "y" || d == "Y") break;
+			else if (d == "n" || d == "N") break;
+			else continue;
+		}
+		if (d == "y" || d == "Y") continue;
+		if (d == "n" || d == "N") break;
+	}
+	return 0;
+}
