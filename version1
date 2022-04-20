@@ -108,7 +108,7 @@ int main() {
 		if (game.endCondition() == 1)cout << "Player 1 wins!" << endl << endl;
 		else if (game.endCondition() == 2)cout << "Player 2 wins!" << endl << endl;
 		else if (count == 9)cout << "Tie Game!" << endl << endl;
-		else;
+		else ;
 
 		string d;
 		for (;;) {
