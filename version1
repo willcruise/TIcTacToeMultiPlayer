@@ -51,13 +51,13 @@ public:
 
 };
 
-int input(int n) {
+string input(string n) {
 	int state = false;
 	for (;;) {
 		cin >> n;
-		for (int i = 1; i < 10; ++i) { if (n == i) { state = true; } }
+		for (int i = 1; i < 10; ++i) { if (n == to_string(i)) { state = true; } }
 		if (state) { break; }
-		else { cout << "Enter again" << endl; return 0; }
+		else { cout << "Enter again" << endl; return "*"; }
 
 	}
 	return n;
@@ -72,7 +72,7 @@ int main() {
 
 	for (int i=0;;i++) {
 		Board game;
-		int n = 0;
+		string n ;
 		int count = 0;
 		rule.showBoard();
 		if (i == 0) { cout << "Enter the referring number" << endl << endl; }
@@ -82,10 +82,9 @@ int main() {
 				for (;;) {
 					cout << "Player 1: ";
 					n = input(n);
-					if (n != 0) break;
-					else continue;
+					if (n != "*") { break; }
 				}
-				if (game.setRoom1(n)) { break; }
+				if (game.setRoom1(stoi(n))) { break; }
 			}
 		
 			game.showBoard();
@@ -96,10 +95,9 @@ int main() {
 				for (;;) {
 					cout << "Player 2: ";
 					n = input(n);
-					if (n != 0) break;
-					else continue;
+					if (n != "*") break;
 				}
-					if (game.setRoom2(n)){ break; }
+					if (game.setRoom2(stoi(n))){ break; }
 			}
 			game.showBoard();
 			++count;
@@ -107,9 +105,10 @@ int main() {
 
 		}
 
-		if (count == 9)cout << "Tie Game!" << endl<<endl;
 		if (game.endCondition() == 1)cout << "Player 1 wins!" << endl << endl;
-		if (game.endCondition() == 2)cout << "Player 2 wins!" << endl << endl;
+		else if (game.endCondition() == 2)cout << "Player 2 wins!" << endl << endl;
+		else if (count == 9)cout << "Tie Game!" << endl << endl;
+		else;
 
 		string d;
 		for (;;) {
