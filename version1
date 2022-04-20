@@ -2,8 +2,6 @@
 #include <string>
 using namespace std;
 
-
-
 class Board {
 private:
 	string r[9];
@@ -22,8 +20,18 @@ public:
 			" " + r[6] + " | " + r[7] + " | " + r[8] + "\n";
 	}
 
-	void setRoom1(int n) { r[n - 1] = "O"; setBoard(); }
-	void setRoom2(int n) { r[n - 1] = "X"; setBoard(); }
+	int setRoom1(int n) {
+		if (r[n - 1] == "O" || r[n - 1] == "X") { cout << "Enter again" << endl; return false; }
+		else {
+			r[n - 1] = "O"; setBoard(); return true;
+		}
+	}
+	int setRoom2(int n) {
+		if (r[n - 1] == "O" || r[n - 1] == "X") { cout << "Enter again" << endl; return false; }
+		else {
+			r[n - 1] = "X"; setBoard(); return true;
+		}
+	}
 
 	void showBoard() { cout << endl << board << endl; }
 
@@ -49,7 +57,7 @@ int input(int n) {
 		cin >> n;
 		for (int i = 1; i < 10; ++i) { if (n == i) { state = true; } }
 		if (state) { break; }
-		else {cout << "Enter again" << endl; return 0;}
+		else { cout << "Enter again" << endl; return 0; }
 
 	}
 	return n;
@@ -71,22 +79,28 @@ int main() {
 
 		for (;;) {
 			for (;;) {
-
-				cout << endl << "Player 1: ";
-				n = input(n);
-				if (n != 0) break;
+				for (;;) {
+					cout << "Player 1: ";
+					n = input(n);
+					if (n != 0) break;
+					else continue;
+				}
+				if (game.setRoom1(n)) { break; }
 			}
-			game.setRoom1(n);
+		
 			game.showBoard();
 			++count;
 			if (game.endCondition() != 0)break;
 			else if (count == 9) break;
 			for (;;) {
-				cout << "Player 2: ";
-				n = input(n);
-				if (n != 0) break;
+				for (;;) {
+					cout << "Player 2: ";
+					n = input(n);
+					if (n != 0) break;
+					else continue;
+				}
+					if (game.setRoom2(n)){ break; }
 			}
-			game.setRoom2(n);
 			game.showBoard();
 			++count;
 			if (game.endCondition() != 0)break;
@@ -101,12 +115,10 @@ int main() {
 		for (;;) {
 			cout << "Play again? (Y/N) : ";
 			cin >> d;
-			if (d == "y" || d == "Y") break;
-			else if (d == "n" || d == "N") break;
-			else continue;
+			if (d == "y" || d == "Y"|| d == "n" || d == "N") break;
 		}
-		if (d == "y" || d == "Y") continue;
 		if (d == "n" || d == "N") break;
+		if (d == "y" || d == "Y") cout << endl;
 	}
 	return 0;
 }
