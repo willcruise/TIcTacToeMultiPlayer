@@ -57,7 +57,7 @@ int input(int n) {
 
 int main() {
 
-	cout << "<TicTacToe MultiPLayer>" << endl;
+	cout << "<TicTacToe MultiPlayer>" << endl;
 
 	Board rule;
 	rule.ruleBoard();
