@@ -118,7 +118,7 @@ class Input {
             n = (scanner.next());
             for (int i = 1; i < 10; ++i) {
                 if (n.equals(String.valueOf(i))) {
-                    state = true;
+                    state = true; break;
                 }
             }
             if (state) {
