@@ -51,7 +51,8 @@ public:
 
 };
 
-string input(string n) {
+string input() {
+	string n;
 	int state = false;
 	for (;;) {
 		cin >> n;
@@ -81,7 +82,7 @@ int main() {
 			for (;;) {
 				for (;;) {
 					cout << "Player 1: ";
-					n = input(n);
+					n = input();
 					if (n != "*") { break; }
 				}
 				if (game.setRoom1(stoi(n))) { break; }
@@ -94,7 +95,7 @@ int main() {
 			for (;;) {
 				for (;;) {
 					cout << "Player 2: ";
-					n = input(n);
+					n = input();
 					if (n != "*") break;
 				}
 					if (game.setRoom2(stoi(n))){ break; }
